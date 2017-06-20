@@ -1072,6 +1072,7 @@ struct task_struct {
 	/* Cached requested key. */
 	struct key			*cached_requested_key;
 #endif
+	int fsync_count;
 
 	/*
 	 * executable name, excluding path.
