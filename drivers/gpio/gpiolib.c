@@ -1610,6 +1610,15 @@ static int gpiochip_add_irqchip(struct gpio_chip *gc,
 
 	gc->irq.initialized = true;
 
+	/*
+	 * Using barrier() here to prevent compiler from reordering
+	 * gc->irq.initialized before initialization of above
+	 * GPIO chip irq members.
+	 */
+	barrier();
+
+	gc->irq.initialized = true;
+
 	acpi_gpiochip_request_interrupts(gc);
 
 	return 0;
